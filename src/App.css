@@ -20,8 +20,8 @@
   isolation: isolate;
   position: relative;
   transition: grid-template-columns 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-              grid-template-rows 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-              gap 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    grid-template-rows 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    gap 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .box {
@@ -32,6 +32,30 @@
   z-index: 1;
   position: relative;
   overflow: hidden;
+}
+
+.box-image {
+  width: 50%;
+  height: auto;
+  position: absolute;
+  bottom: 0;
+  left: 65%;
+  transform: translate(-50%, 56%) scaleX(-1) rotate(-15deg);
+  display: block;
+}
+
+.box-title {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #f0f0f0;
+  font-family: sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  max-width: 50%;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .box:nth-child(1) {

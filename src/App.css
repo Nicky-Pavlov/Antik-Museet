@@ -62,6 +62,12 @@
   background-color: #3a4a5a;
 }
 
+.box:nth-child(1) .box-image {
+  width: 60%;
+  left: 70%;
+  transform: translate(-45%, 65%) scaleX(-1) rotate(-15deg);
+}
+
 .box:nth-child(2) {
   background-color: #56708a;
 }

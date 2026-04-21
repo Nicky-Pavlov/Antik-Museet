@@ -22,6 +22,10 @@ function Home() {
           <h2 className="box-title">Paint a statue</h2>
         </div>
         <div className="box"></div>
+        <div className="box"></div>
+        <div className="box" onClick={() => navigate('/the-duel')} style={{ cursor: 'pointer' }}>
+          <h2 className="box-title">The Duel</h2>
+        </div>
       </div>
     </div>
   )

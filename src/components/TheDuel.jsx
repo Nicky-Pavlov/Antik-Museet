@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import argumentBg from '../assets/fight assets/argument scene/argument background.png';
 import hitGirl1 from '../assets/fight assets/argument scene/hit girl 1.png';
 import hitGirl2 from '../assets/fight assets/argument scene/hit girl 2.png';
@@ -19,10 +20,20 @@ const dialogueLines = [
 
 function TheDuel() {
   const [lineIndex, setLineIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const navigate = useNavigate();
 
   const advanceDialogue = () => {
+    if (isTransitioning) {
+      return;
+    }
+
     setLineIndex((currentIndex) => {
       if (currentIndex >= dialogueLines.length - 1) {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          navigate('/fight-scene');
+        }, 700);
         return currentIndex;
       }
 
@@ -53,7 +64,7 @@ function TheDuel() {
       overflow: 'hidden',
       margin: 0,
       padding: 0,
-      cursor: 'pointer',
+      cursor: isTransitioning ? 'default' : 'pointer',
     }}
     onClick={advanceDialogue}
     onKeyDown={handleKeyDown}
@@ -61,6 +72,31 @@ function TheDuel() {
     tabIndex={0}
     aria-label="Advance dialogue"
     >
+      <button
+        type="button"
+        onClick={(event) => {
+          event.stopPropagation();
+          navigate('/');
+        }}
+        style={{
+          position: 'absolute',
+          top: '2.5%',
+          left: '2%',
+          zIndex: 20,
+          border: 'none',
+          borderRadius: '999px',
+          padding: '0.55rem 1rem',
+          backgroundColor: 'rgba(0, 0, 0, 0.62)',
+          color: '#f7e9d5',
+          fontSize: '0.95rem',
+          fontWeight: 700,
+          letterSpacing: '0.02em',
+          cursor: 'pointer',
+        }}
+      >
+        Back to Main
+      </button>
+
       {/* Hit Girl 1 - Left */}
       <img
         src={hitGirl1}
@@ -135,6 +171,17 @@ function TheDuel() {
           height: '96%',
           objectFit: 'contain',
           objectPosition: 'bottom',
+        }}
+      />
+
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundColor: '#000',
+          opacity: isTransitioning ? 1 : 0,
+          transition: 'opacity 700ms ease-in-out',
+          pointerEvents: 'none',
         }}
       />
     </div>

@@ -4,6 +4,7 @@ import BuildView from './components/BuildView';
 import TheDuel from './components/TheDuel';
 import FightScene from './components/FightScene';
 import FightConclusion from './components/FightConclusion';
+import InfoPage from './components/InfoPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/the-duel" element={<TheDuel />} />
       <Route path="/fight-scene" element={<FightScene />} />
       <Route path="/fight-conclusion" element={<FightConclusion />} />
+      <Route path="/info" element={<InfoPage />} />
     </Routes>
   );
 }

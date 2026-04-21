@@ -17,7 +17,10 @@ function Home() {
           <img src={babyStatue} alt="Baby Statue" className="box-image" />
           <h2 className="box-title">Build a statue</h2>
         </div>
-        <div className="box"></div>
+        <div className="box" onClick={() => navigate('/paint')} style={{ cursor: 'pointer' }}>
+          <img src={babyStatue} alt="Baby Statue" className="box-image" />
+          <h2 className="box-title">Paint a statue</h2>
+        </div>
         <div className="box"></div>
       </div>
     </div>

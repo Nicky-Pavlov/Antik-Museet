@@ -126,6 +126,7 @@ function PuzzlePiece({ piece, pieceState, onPieceDragStart, onPieceDragEnd }) {
           userSelect: 'none',
         }}
       />
+      {/* 
       <div
         style={{
           marginTop: '8px',
@@ -145,6 +146,7 @@ function PuzzlePiece({ piece, pieceState, onPieceDragStart, onPieceDragEnd }) {
         <br />
         {`tgt: (${targetBoardX}, ${targetBoardY})`}
       </div>
+      */}
     </motion.div>
   );
 }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import * as THREE from 'three';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import roomBg from '../assets/MuseumBG.jpg';
 import '../App.css';
 
 const statueFiles = ['/statues/Athena.stl', '/statues/Aphrodite.stl', '/statues/Agrippina.stl'];
@@ -32,7 +33,7 @@ function PaintView() {
 
     const container = mountRef.current;
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color('#afc478');
+    scene.background = null;
 
     const camera = new THREE.PerspectiveCamera(
       60,
@@ -40,12 +41,14 @@ function PaintView() {
       0.1,
       2000
     );
-    camera.position.set(0, 40, 140);
+    camera.position.set(0, 30, 80);
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.shadowMap.enabled = true;
+    renderer.domElement.style.border = '2px solid #333';
+    renderer.domElement.style.borderRadius = '8px';
     container.appendChild(renderer.domElement);
 
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -212,45 +215,121 @@ function PaintView() {
   }, [selectedStatueUrl]);
 
   return (
-    <div className="app" style={{ padding: '20px' }}>
-      <h1>Paint View</h1>
-      <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '16px' }}>
-        <label htmlFor="paint-color">Brush color:</label>
-        <input
-          id="paint-color"
-          type="color"
-          value={paintColor}
-          onChange={(event) => setPaintColor(event.target.value)}
-          style={{ cursor: 'pointer' }}
-        />
-        <label htmlFor="brush-radius" style={{ marginLeft: '10px' }}>
-          Brush radius:
-        </label>
-        <input
-          id="brush-radius"
-          type="range"
-          min="2"
-          max="20"
-          step="1"
-          value={brushRadius}
-          onChange={(event) => setBrushRadius(Number(event.target.value))}
-          style={{ cursor: 'pointer' }}
-        />
-        <span>{brushRadius}</span>
-      </div>
-      <button
-        onClick={() => navigate('/')}
-        style={{ marginBottom: '16px', padding: '8px 12px', cursor: 'pointer' }}
+    <div
+      className="app"
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'stretch',
+        minHeight: '100vh',
+        color: '#fff',
+        overflow: 'hidden',
+        position: 'relative',
+        backgroundImage: `url(${roomBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      <div
+        style={{
+          width: '360px',
+          padding: '30px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          color: 'black',
+          zIndex: 100,
+        }}
       >
-        Go Back
-      </button>
+        <h1 style={{ margin: '0 0 10px 0' }}>Paint a Statue</h1>
+        <p style={{ margin: '0 0 20px 0' }}>
+          Paint the statue with your favorite colors!
+        </p>
+
+        <div
+          style={{
+            display: 'flex',
+            gap: '12px',
+            alignItems: 'center',
+            marginBottom: '12px',
+            width: '100%',
+            flexWrap: 'wrap',
+          }}
+        >
+          <label htmlFor="paint-color">
+            Color:
+          </label>
+          <input
+            id="paint-color"
+            type="color"
+            value={paintColor}
+            onChange={(event) => setPaintColor(event.target.value)}
+            style={{
+              cursor: 'pointer',
+              width: '40px',
+              height: '32px',
+              border: 'none',
+              borderRadius: '4px',
+            }}
+          />
+        </div>
+
+        <div
+          style={{
+            display: 'flex',
+            gap: '12px',
+            alignItems: 'center',
+            marginBottom: '16px',
+            width: '100%',
+            flexWrap: 'wrap',
+          }}
+        >
+          <label htmlFor="brush-radius">
+            Brush radius:
+          </label>
+          <input
+            id="brush-radius"
+            type="range"
+            min="2"
+            max="20"
+            step="1"
+            value={brushRadius}
+            onChange={(event) => setBrushRadius(Number(event.target.value))}
+            style={{ cursor: 'pointer', flex: 1, minWidth: '80px' }}
+          />
+          <span>{brushRadius}</span>
+        </div>
+
+        <button
+          onClick={() => navigate('/')}
+          style={{
+            padding: '10px 20px',
+            fontSize: '1rem',
+            cursor: 'pointer',
+            borderRadius: '5px',
+            border: 'none',
+            backgroundColor: '#1f2937',
+            color: '#f8fafc',
+            boxShadow: '0 4px 6px rgba(0,0,0,0.3)'
+          }}
+        >
+          Go Back
+        </button>
+      </div>
 
       <div
         ref={mountRef}
-        style={{ width: '70vw', height: '70vh', borderRadius: '8px', overflow: 'hidden' }}
+        style={{
+          flex: 1,
+          height: 'calc(100% - 60px)',
+          position: 'relative',
+          margin: '30px 20px',
+        }}
       />
     </div>
   );
 }
 
 export default PaintView;
+

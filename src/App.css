@@ -86,35 +86,35 @@
   background-color: #9b7b63;
 }
 
-.box:hover {
+.box.expanded-box {
   z-index: 10;
 }
 
-.grid-container:has(.box:hover) {
+.grid-container.expanded {
   gap: 0px;
 }
 
-.grid-container:has(.box:nth-child(1):hover) {
+.grid-container.expanded:has(.box:nth-child(1).expanded-box) {
   grid-template-columns: 1fr 0fr;
   grid-template-rows: 1fr 0fr;
 }
 
-.grid-container:has(.box:nth-child(2):hover) {
+.grid-container.expanded:has(.box:nth-child(2).expanded-box) {
   grid-template-columns: 0fr 1fr;
   grid-template-rows: 1fr 0fr;
 }
 
-.grid-container:has(.box:nth-child(3):hover) {
+.grid-container.expanded:has(.box:nth-child(3).expanded-box) {
   grid-template-columns: 1fr 0fr;
   grid-template-rows: 0fr 1fr;
 }
 
-.grid-container:has(.box:nth-child(4):hover) {
+.grid-container.expanded:has(.box:nth-child(4).expanded-box) {
   grid-template-columns: 0fr 1fr;
   grid-template-rows: 0fr 1fr;
 }
 
-.grid-container:hover .box:not(:hover) {
+.grid-container.expanded .box:not(.expanded-box) {
   opacity: 0;
 }
 

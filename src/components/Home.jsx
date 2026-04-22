@@ -40,7 +40,7 @@ function Home() {
           <img src={customGuy} alt="Custom Guy" className="box-image" />
           <h2 className="box-title">Paint a statue</h2>
         </div>
-        <div className={`box ${expandedBox === 3 ? 'expanded-box' : ''}`} onClick={() => handleBoxClick(3, '/fight-scene')} style={{ cursor: 'pointer' }}>
+        <div className={`box ${expandedBox === 3 ? 'expanded-box' : ''}`} onClick={() => handleBoxClick(3, '/the-duel')} style={{ cursor: 'pointer' }}>
           <img src={girl2} alt="Girl 2" className="box-image" style={{ transform: 'translate(-50%, 63%) scaleX(-1) rotate(-15deg)' }} />
           <h2 className="box-title">Fight</h2>
         </div>

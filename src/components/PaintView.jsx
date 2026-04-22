@@ -6,7 +6,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import roomBg from '../assets/MuseumBG.jpg';
 import '../App.css';
 
-const statueFiles = ['/statues/Athena.stl', '/statues/Aphrodite.stl', '/statues/Agrippina.stl'];
+const statueFiles = ['statues/Athena.stl', 'statues/Aphrodite.stl', 'statues/Agrippina.stl'];
 
 function PaintView() {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ function PaintView() {
   const brushRadiusRef = useRef(brushRadius);
   const selectedStatueUrl = useMemo(() => {
     const randomIndex = Math.floor(Math.random() * statueFiles.length);
-    return statueFiles[randomIndex];
+    return import.meta.env.BASE_URL + statueFiles[randomIndex];
   }, []);
 
   useEffect(() => {
